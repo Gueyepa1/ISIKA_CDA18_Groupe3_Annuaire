@@ -15,8 +15,8 @@ public class Main extends Application {
 	
 	public static ObservableList<Stagiaire> stagiaires = FXCollections.observableArrayList();
 //	public static ArbreBinaire stagiaires = new ArbreBinaire();
-	String nom, prenom, lieu, promotion, annee;
-	Stagiaire stagiaire = new Stagiaire(nom, prenom, lieu, promotion, annee);
+//	String nom, prenom, lieu, promotion, annee;
+//	Stagiaire stagiaire = new Stagiaire(nom, prenom, lieu, promotion, annee);
 	@Override
 	public void start(Stage primaryStage) { 
 		try {

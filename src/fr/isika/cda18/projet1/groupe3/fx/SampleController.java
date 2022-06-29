@@ -98,7 +98,7 @@ public class SampleController {
 		AnchorPane layoutListe = (AnchorPane)FXMLLoader.load(getClass().getResource("ListeStagiaires.fxml"));
 		
 		// 3) On créer une scène
-		Scene sceneList = new Scene(layoutListe,850,500);
+		Scene sceneList = new Scene(layoutListe,500,500);
 		sceneList.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
 		// 4) On demande à notre stage(théatre) d'affiche la nouvelle scène : sceneList
