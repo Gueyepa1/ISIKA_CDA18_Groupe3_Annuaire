@@ -1,8 +1,16 @@
 package fr.isika.cda18.projet1.groupe3.entites;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Stagiaire {
 
 	// attributs
+
 
 	private String nom;
 	private String prenom;
@@ -10,20 +18,25 @@ public class Stagiaire {
 	private String promotion;
 	private String annee;
 
-	public static final int TAILLE_NOM = 30;
-	public static final int TAILLE_PRENOM = 30;
-	public static final int TAILLE_LIEU = 3;
-	public static final int TAILLE_PROMOTION = 15;
+	public static final int TAILLE_NOM = 21;
+	public static final int TAILLE_PRENOM = 20;
+	public static final int TAILLE_LIEU = 2;
+	public static final int TAILLE_PROMOTION = 11;
 	public static final int TAILLE_ANNEE = 4;
-	public static final int TAILLE_OBJET_OCTET = 162;
+	public static final int TAILLE_OBJET_OCTET = 116;
 
 	public Stagiaire(String nom, String prenom, String lieu, String promotion, String annee) {
 		super();
 		this.nom = nom;
+		this.nom = augmenterNom();
 		this.prenom = prenom;
+		this.prenom = augmenterPrenom();
 		this.lieu = lieu;
+		this.lieu = augmenterLieu();
 		this.promotion = promotion;
+		this.promotion = augmenterPromotion();
 		this.annee = annee;
+		this.annee = augmenterAnnee();
 
 	}
 
@@ -66,9 +79,9 @@ public class Stagiaire {
 	public void setAnnee(String annee) {
 		this.annee = annee;
 	}
-
-	public String AugmenterNom() {
-		String nomLong = "", prenomLong = "", lieuLong = "", promotionLong = "", anneeLong = "";
+	
+	public String augmenterNom() {
+		String nomLong = "";
 		if (nom.length() <= TAILLE_NOM) {
 			nomLong = this.nom;
 			for (int i = nom.length(); i < TAILLE_NOM; i++) {
@@ -81,7 +94,7 @@ public class Stagiaire {
 		}
 		return nomLong;
 	}
-	public String AugmenterPrenom() {
+	public String augmenterPrenom() {
 		String prenomLong = "";
 		if (prenom.length() <= TAILLE_PRENOM) {
 			prenomLong = this.prenom;
@@ -95,7 +108,7 @@ public class Stagiaire {
 		}
 		return prenomLong;
 	}
-	public String AugmenterLieu() {
+	public String augmenterLieu() {
 		String lieuLong = "";
 		if (lieu.length() <= TAILLE_LIEU) {
 			lieuLong = this.lieu;
@@ -109,7 +122,7 @@ public class Stagiaire {
 		}
 		return lieuLong;
 	}
-	public String AugmenterPromotion() {
+	public String augmenterPromotion() {
 		String promotionLong = "";
 		if (promotion.length() <= TAILLE_PROMOTION) {
 			promotionLong = this.promotion;
@@ -123,7 +136,7 @@ public class Stagiaire {
 		}
 		return promotionLong;
 	}
-	public String AugmenterAnnee() {
+	public String augmenterAnnee() {
 		String anneeLong = "";
 		if (annee.length() <= TAILLE_ANNEE) {
 			anneeLong = this.annee;
@@ -138,10 +151,45 @@ public class Stagiaire {
 		return anneeLong;
 	}
 
-	@Override
+		@Override
 	public String toString() {
-		return nom + " " + prenom + " " + lieu + " " + promotion+ " " + annee+ " ";
+		return nom + " " + prenom + " " + lieu + " " + promotion+ " " + annee + " ";
 	}
-	
+	private ArrayList<Stagiaire> stagiaires = new ArrayList<>();
+
+	public ArrayList<Stagiaire> getStagiaires(){
+		return stagiaires;
+	}
+
+	public static List<Stagiaire> initialiser() {
+		List<Stagiaire> stagiaires = new ArrayList<>();
+		File file = new File("src/Donnees/STAGIAIRES.DON");
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			
+			Stagiaire stagiaire;
+
+			String nom = "";
+			String prenom = "";
+			String lieu = "";
+			String promotion = "";
+			String annee = "";
+
+			// tant qu'il y a quelque chose à lire, lit la ligne
+			while (br.ready()) {
+				nom = br.readLine();
+				prenom = br.readLine();
+				lieu = br.readLine();
+				promotion = br.readLine();
+				annee = br.readLine();
+				br.readLine();
+				stagiaire = new Stagiaire(nom, prenom, lieu, promotion, annee);
+
+				stagiaires.add(stagiaire);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return stagiaires;
+	}
 
 }

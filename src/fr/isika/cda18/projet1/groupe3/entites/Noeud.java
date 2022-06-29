@@ -1,17 +1,28 @@
 package fr.isika.cda18.projet1.groupe3.entites;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
 public class Noeud {
 
+	private static final long TAILLE_NOEUD = 124;
 	private Stagiaire stagiaire;
-	private Noeud filsGauche;
-	private Noeud filsDroit;
+	private int filsGauche;
+	private int filsDroit;
 
 	public Noeud(Stagiaire stagiaire) {
 		super();
 		this.stagiaire = stagiaire;
-		this.filsGauche = null;
-		this.filsDroit = null;
+		filsGauche = -1;
+		filsDroit = -1;
 
+	}
+
+	public Noeud(Stagiaire stagiaire, int filsGauche, int filsDroit) {
+		super();
+		this.stagiaire = stagiaire;
+		this.filsGauche = filsGauche;
+		this.filsDroit = filsDroit;
 	}
 
 	// Getters and setters
@@ -19,11 +30,11 @@ public class Noeud {
 		return stagiaire;
 	}
 
-	public Noeud getFilsGauche() {
+	public int getFilsGauche() {
 		return filsGauche;
 	}
 
-	public Noeud getFilsDroit() {
+	public int getFilsDroit() {
 		return filsDroit;
 	}
 
@@ -31,45 +42,95 @@ public class Noeud {
 		this.stagiaire = stagiaire;
 	}
 
-	public void setFilsGauche(Noeud filsGauche) {
+	public void setFilsGauche(int filsGauche) {
 		this.filsGauche = filsGauche;
 	}
 
-	public void setFilsDroit(Noeud filsDroit) {
+	public void setFilsDroit(int filsDroit) {
 		this.filsDroit = filsDroit;
 	}
 
 	// méthodes spécifiques
+	
 
-	public String toString() {
-
-		String result = "";
-
-		if (this.filsGauche != null) {
-			result += this.filsGauche.toString();
+	public void ajouterStagiaire(RandomAccessFile raf, Noeud noeudAAjouter) {
+		try {
+			if (raf.length() == 0) {
+				ArbreBinaire.ecrire(raf, noeudAAjouter);
+				return;
+			}
+			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			if (noeud.getStagiaire().getNom().compareTo(noeudAAjouter.getStagiaire().getNom()) > 0) {
+				if (noeud.filsGauche < 0) {
+					raf.seek(raf.getFilePointer() - 8);
+					raf.writeInt((int) (raf.length() / TAILLE_NOEUD));
+					raf.seek(raf.length());
+					ArbreBinaire.ecrire(raf, noeudAAjouter);
+				} else {
+					raf.seek(TAILLE_NOEUD * noeud.filsGauche);
+					ajouterStagiaire(raf, noeudAAjouter);
+				}
+			} else {
+				if (noeud.filsDroit < 0) {
+					raf.seek(raf.getFilePointer() - 4);
+					raf.writeInt((int) (raf.length() / TAILLE_NOEUD));
+					raf.seek(raf.length());
+					ArbreBinaire.ecrire(raf, noeudAAjouter);
+				} else {
+					raf.seek(TAILLE_NOEUD * noeud.filsDroit);
+					ajouterStagiaire(raf, noeudAAjouter);
+				}
+			}
+		} catch (IOException e) {
 		}
-		result += " " + stagiaire;
-		if (this.filsDroit != null) {
-			result += this.filsDroit.toString();
-		}
-		return result;
-
 	}
 
-	public void AjouterStagiaire(Noeud noeudAAjouter) {
-		if (stagiaire.getNom().compareTo(noeudAAjouter.getStagiaire().getNom()) > 0) {
-			if (this.filsGauche == null) {
-				this.filsGauche = noeudAAjouter;
-			} else {
-				this.filsGauche.AjouterStagiaire(noeudAAjouter);
+	public static String toString(RandomAccessFile raf) {
+		try {
+			String result = "";
+			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			if (noeud.filsGauche > 0) {
+				raf.seek(noeud.filsGauche * TAILLE_NOEUD);
+				result += toString(raf);
 			}
-		} else {
+			result += " " + noeud.getStagiaire();
+			if (noeud.filsDroit > 0) {
+				raf.seek(noeud.filsDroit * TAILLE_NOEUD);
+				result += toString(raf);
+			}
+			return result;
+		} catch (IOException e) {
 
-			if (this.filsDroit == null) {
-				this.filsDroit = noeudAAjouter;
-			} else {
-				this.filsDroit.AjouterStagiaire(noeudAAjouter);
-			}
 		}
+		return null;
+	}
+
+	public static boolean rechercheNoeud(RandomAccessFile raf, Noeud noeudARechercher) {
+		try {
+			if (raf.length()==0) {
+			return false;
+			}
+			 Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			 if (noeudARechercher.getStagiaire().getNom().equals(noeud.getStagiaire().getNom())) {
+					return true;
+				}
+			if (noeud.getStagiaire().getNom().compareTo(noeudARechercher.getStagiaire().getNom()) > 0) {
+				if (noeud.filsGauche < 0) {
+					return false;
+				}else {
+					raf.seek(TAILLE_NOEUD * noeud.filsGauche);
+					return rechercheNoeud(raf, noeudARechercher);
+				}
+			}else {
+				if(noeud.filsDroit < 0) {
+					return false;
+				}else {
+					raf.seek(TAILLE_NOEUD * noeud.filsDroit);
+					return rechercheNoeud(raf, noeudARechercher);
+				}
+			}
+		} catch (IOException e) {
+		}
+		return false;
 	}
 }
