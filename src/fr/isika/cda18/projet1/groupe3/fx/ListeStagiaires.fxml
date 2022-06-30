@@ -5,40 +5,134 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda18.projet1.groupe3.fx.ListeStagiairesController">
+<AnchorPane prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda18.projet1.groupe3.fx.ListeStagiairesController">
    <children>
-      <VBox prefHeight="490.0" prefWidth="453.0">
+      <VBox prefHeight="800.0" prefWidth="700.0">
          <children>
-            <Label prefHeight="73.0" prefWidth="199.0" text="Liste des stagiaires">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="155.0" />
-               </VBox.margin>
-            </Label>
-            <TableView fx:id="tableauStagiaires" prefHeight="349.0" prefWidth="453.0">
-              <columns>
-                <TableColumn fx:id="nomC" prefWidth="85.0" text="Nom" />
-                <TableColumn fx:id="prenomC" prefWidth="81.0" text="Prénom" />
-                  <TableColumn fx:id="lieuC" prefWidth="90.0" text="Lieu" />
-                  <TableColumn fx:id="promotionC" prefWidth="106.0" text="Promotion" />
-                  <TableColumn fx:id="anneeC" prefWidth="90.0" text="Année" />
-              </columns>
-            </TableView>
-            <HBox prefHeight="70.0" prefWidth="453.0">
+            <HBox prefHeight="100.0" prefWidth="700.0">
                <children>
-                  <Button mnemonicParsing="false" text="Imprimer la liste des stagiaires">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="300.0" text="Liste des stagiaires">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="200.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="700.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="800.0">
+                     <children>
+                        <HBox prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="100.0" text="Recherche">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="300.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="700.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="700.0">
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                       <children>
+                                          <TextField prefWidth="180.0" promptText="Nom">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <TextField layoutX="10.0" layoutY="20.0" prefWidth="180.0" promptText="Prénom">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <TextField layoutX="159.0" layoutY="20.0" prefWidth="60.0" promptText="Lieu">
+                                             <HBox.margin>
+                                                <Insets left="13.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <TextField layoutX="308.0" layoutY="20.0" prefWidth="140.0" promptText="Promotion">
+                                             <HBox.margin>
+                                                <Insets left="11.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <TextField layoutX="457.0" layoutY="20.0" prefWidth="70.0" promptText="Année">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox layoutX="10.0" layoutY="10.0" prefHeight="90.0" prefWidth="700.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" text="Chercher">
+                                             <HBox.margin>
+                                                <Insets left="322.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="500.0" prefWidth="700.0">
+               <children>
+                  <TableView fx:id="tableauStagiaires" prefHeight="500.0" prefWidth="700.0">
+                    <columns>
+                      <TableColumn fx:id="nomC" prefWidth="200.0" text="Nom" />
+                      <TableColumn fx:id="prenomC" prefWidth="200.0" text="Prénom" />
+                        <TableColumn fx:id="lieuC" minWidth="0.0" prefWidth="70.0" text="Lieu" />
+                        <TableColumn fx:id="promotionC" prefWidth="150.0" text="Promotion" />
+                        <TableColumn fx:id="anneeC" text="Année" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox prefHeight="70.0" prefWidth="700.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Imprimer">
                      <font>
                         <Font size="20.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="100.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button layoutX="110.0" layoutY="20.0" mnemonicParsing="false" text="Ajouter Stagiaire">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button disable="true" layoutX="227.0" layoutY="20.0" mnemonicParsing="false" text="Modifier Stagiaire">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
                </children>
