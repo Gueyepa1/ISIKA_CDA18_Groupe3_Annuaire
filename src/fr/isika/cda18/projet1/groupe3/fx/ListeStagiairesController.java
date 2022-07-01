@@ -74,18 +74,21 @@ public class ListeStagiairesController implements Initializable {
 			printed.setText(printed.getText() + stagiaire.toString() + "\n");
 		}
 		
-		while(printerJob.printPage(printed)) {
+		while(printerJob.getJobStatus() != PrinterJob.JobStatus.CANCELED &&  printerJob.printPage(printed)) {
 			if(printed.getText().length() > 2752) {
 				printed.setText(printed.getText().substring(2752));
 			} else {break;}
 		}
-		printerJob.endJob();
 		
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Impression");
-		alert.setHeaderText("");
-		alert.setContentText("Impression terminée");
-		alert.showAndWait();
+		if(printerJob.getJobStatus() == PrinterJob.JobStatus.PRINTING) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Impression");
+			alert.setHeaderText("");
+			alert.setContentText("Impression terminée");
+			alert.showAndWait();
+		}
+		
+		printerJob.endJob();
 	}
 	
 	
