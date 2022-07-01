@@ -63,15 +63,17 @@ public class ListeStagiairesController implements Initializable {
 
 	@FXML
 	private void imprimerHandler(Event e) {
-		Stage primaryStage = (Stage) imprimer.getScene().getWindow();
 		Printer myPrinter = Printer.getDefaultPrinter();
 		myPrinter.createPageLayout(Paper.A4, PageOrientation.PORTRAIT, MarginType.HARDWARE_MINIMUM);
 		PrinterJob printerJob = PrinterJob.createPrinterJob(myPrinter);
+		
 		ObservableList<Stagiaire> stagiaires = tableauStagiaires.getItems();
 		Label printed = new Label();
+		
 		for(Stagiaire stagiaire : stagiaires) {
 			printed.setText(printed.getText() + stagiaire.toString() + "\n");
 		}
+		
 		while(printerJob.printPage(printed)) {
 			if(printed.getText().length() > 2752) {
 				printed.setText(printed.getText().substring(2752));
