@@ -50,7 +50,7 @@ public class ListeStagiairesController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		nomC.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("nom"));
-		prenomC.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("prénom"));
+		prenomC.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("prenom"));
 		lieuC.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("lieu"));
 		promotionC.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("promotion"));
 		anneeC.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("annee"));

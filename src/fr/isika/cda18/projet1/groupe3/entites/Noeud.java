@@ -1,5 +1,8 @@
 package fr.isika.cda18.projet1.groupe3.entites;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
@@ -55,19 +58,25 @@ public class Noeud {
 
 	// m√©thodes sp√©cifiques
 
-	public void ajouterStagiaire(RandomAccessFile raf, Noeud noeudAAjouter) {
+	public static void ajouterStagiaire(RandomAccessFile raf, Noeud noeudAAjouter) {
 		try {
 			if (raf.length() == 0) {
-				ArbreBinaire.ecrire(raf, noeudAAjouter);
+				ecrireNoeud(raf, noeudAAjouter);
 				return;
 			}
-			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			Noeud noeud = lireNoeud(raf);
+			if(noeud.getStagiaire().getNom().equals(noeudAAjouter.getStagiaire().getNom()) &&
+					noeud.getStagiaire().getPromotion().equals(noeudAAjouter.getStagiaire().getPromotion()) &&
+					noeud.getStagiaire().getPrenom().equals(noeudAAjouter.getStagiaire().getPrenom())) {
+					//Doublon dÈtectÈ, on s'arrÍte
+					return;
+				}
 			if (noeud.getStagiaire().getNom().compareTo(noeudAAjouter.getStagiaire().getNom()) > 0) {
 				if (noeud.filsGauche < 0) {
 					raf.seek(raf.getFilePointer() - 8);
 					raf.writeInt((int) (raf.length() / TAILLE_NOEUD));
 					raf.seek(raf.length());
-					ArbreBinaire.ecrire(raf, noeudAAjouter);
+					ecrireNoeud(raf, noeudAAjouter);
 				} else {
 					raf.seek(TAILLE_NOEUD * noeud.filsGauche);
 					ajouterStagiaire(raf, noeudAAjouter);
@@ -77,7 +86,7 @@ public class Noeud {
 					raf.seek(raf.getFilePointer() - 4);
 					raf.writeInt((int) (raf.length() / TAILLE_NOEUD));
 					raf.seek(raf.length());
-					ArbreBinaire.ecrire(raf, noeudAAjouter);
+					ecrireNoeud(raf, noeudAAjouter);
 				} else {
 					raf.seek(TAILLE_NOEUD * noeud.filsDroit);
 					ajouterStagiaire(raf, noeudAAjouter);
@@ -90,7 +99,7 @@ public class Noeud {
 	public static String toString(RandomAccessFile raf) {
 		try {
 			String result = "";
-			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			Noeud noeud = lireNoeud(raf);
 			if (noeud.filsGauche > 0) {
 				raf.seek(noeud.filsGauche * TAILLE_NOEUD);
 				result += toString(raf);
@@ -112,7 +121,7 @@ public class Noeud {
 			if (raf.length() == 0) {
 				return false;
 			}
-			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			Noeud noeud = lireNoeud(raf);
 			if (noeudARechercher.getStagiaire().getNom().equals(noeud.getStagiaire().getNom())) {
 				return true;
 			}
@@ -139,12 +148,12 @@ public class Noeud {
 	public static Noeud noeudSuccesseur(RandomAccessFile raf) {
 		try {
 			long position = raf.getFilePointer();
-			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			Noeud noeud = lireNoeud(raf);
 			raf.seek(TAILLE_NOEUD * noeud.filsDroit);
-			noeud = ArbreBinaire.lireNoeud(raf);
+			noeud = lireNoeud(raf);
 			while (noeud.filsGauche > 0) {
 				raf.seek(TAILLE_NOEUD * noeud.filsGauche);
-				noeud = ArbreBinaire.lireNoeud(raf);
+				noeud = lireNoeud(raf);
 			}
 			raf.seek(position);
 			return noeud;
@@ -156,7 +165,7 @@ public class Noeud {
 	public static int supprimerRacine(RandomAccessFile raf) {
 		try {
 			long position = raf.getFilePointer();
-			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			Noeud noeud = lireNoeud(raf);
 
 			if (noeud.filsGauche < 0 && noeud.filsDroit < 0) {
 				return -1;
@@ -169,7 +178,7 @@ public class Noeud {
 				Noeud successeur = noeudSuccesseur(raf);
 				raf.seek(position);
 				noeud.stagiaire = successeur.stagiaire;
-				ArbreBinaire.ecrire(raf, noeud);
+				ecrireNoeud(raf, noeud);
 				raf.seek(TAILLE_NOEUD * noeud.filsDroit);
 				supprimerNoeud(raf, successeur.stagiaire);
 				return (int) (position / TAILLE_NOEUD);
@@ -183,7 +192,7 @@ public class Noeud {
 	public static int supprimerNoeud(RandomAccessFile raf, Stagiaire stagiaireASupprimer) {
 		try {
 			long position = raf.getFilePointer();
-			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			Noeud noeud = lireNoeud(raf);
 			if (noeud.getStagiaire().getNom().equals(stagiaireASupprimer.getNom())
 					&& noeud.getStagiaire().getPrenom().equals(stagiaireASupprimer.getPrenom())
 					&& noeud.getStagiaire().getPromotion().equals(stagiaireASupprimer.getPromotion())) {
@@ -194,7 +203,7 @@ public class Noeud {
 					raf.seek(TAILLE_NOEUD * noeud.filsGauche);
 					noeud.filsGauche = supprimerNoeud(raf, stagiaireASupprimer);
 					raf.seek(position);
-					ArbreBinaire.ecrire(raf, noeud);
+					ecrireNoeud(raf, noeud);
 				} else {
 					return (int) (position / TAILLE_NOEUD);
 				}
@@ -203,7 +212,7 @@ public class Noeud {
 					raf.seek(TAILLE_NOEUD * noeud.filsDroit);
 					noeud.filsDroit = supprimerNoeud(raf, stagiaireASupprimer);
 					raf.seek(position);
-					ArbreBinaire.ecrire(raf, noeud);
+					ecrireNoeud(raf, noeud);
 				} else {
 					return (int) (position / TAILLE_NOEUD);
 				}
@@ -217,7 +226,7 @@ public class Noeud {
 	public static ObservableList<Stagiaire> rechercheMulticritere(RandomAccessFile raf, Stagiaire criteres) {
 		try {
 			ObservableList<Stagiaire> stagiaires = FXCollections.observableArrayList();
-			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			Noeud noeud = lireNoeud(raf);
 			if (noeud.filsGauche > 0) {
 				raf.seek(TAILLE_NOEUD * noeud.filsGauche);
 				stagiaires.addAll(rechercheMulticritere(raf, criteres));
@@ -237,6 +246,109 @@ public class Noeud {
 			if (noeud.filsDroit > 0) {
 				raf.seek(TAILLE_NOEUD * noeud.filsDroit);
 				stagiaires.addAll(rechercheMulticritere(raf, criteres));
+			}
+			return stagiaires;
+		} catch (IOException e) {
+
+		}
+		return null;
+	}
+
+	public static Noeud lireNoeud(RandomAccessFile raf) {
+
+		try {
+			String nom = "";
+			String prenom = "";
+			String lieu = "";
+			String promotion = "";
+			String annee = "";
+			int filsGauche = -1;
+			int filsDroit = -1;
+			// je lis les x caract√®res de l'attribut String
+			for (int i = 0; i < Stagiaire.TAILLE_NOM; i++) {
+				nom += raf.readChar();
+			}
+
+			for (int i = 0; i < Stagiaire.TAILLE_PRENOM; i++) {
+				prenom += raf.readChar();
+			}
+
+			for (int i = 0; i < Stagiaire.TAILLE_LIEU; i++) {
+				lieu += raf.readChar();
+			}
+
+			for (int i = 0; i < Stagiaire.TAILLE_PROMOTION; i++) {
+				promotion += raf.readChar();
+			}
+
+			for (int i = 0; i < Stagiaire.TAILLE_ANNEE; i++) {
+				annee += raf.readChar();
+			}
+			filsGauche = raf.readInt();
+			filsDroit = raf.readInt();
+			Noeud noeud = new Noeud(new Stagiaire(nom, prenom, lieu, promotion, annee), filsGauche, filsDroit);
+			return noeud;
+		} catch (IOException e) {
+		}
+		return null;
+	}
+
+	public static void ecrireNoeud(RandomAccessFile raf, Noeud noeudAAjouter) {
+		try {
+			raf.writeChars(noeudAAjouter.getStagiaire().getNom());
+			raf.writeChars(noeudAAjouter.getStagiaire().getPrenom());
+			raf.writeChars(noeudAAjouter.getStagiaire().getLieu());
+			raf.writeChars(noeudAAjouter.getStagiaire().getPromotion());
+			raf.writeChars(noeudAAjouter.getStagiaire().getAnnee());
+			raf.writeInt(noeudAAjouter.getFilsGauche());
+			raf.writeInt(noeudAAjouter.getFilsDroit());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void donneesVersRaf() {
+		File file = new File("src/Donnees/STAGIAIRES.DON");
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			RandomAccessFile raf = new RandomAccessFile("src/Donnees/ListeStagiaires.bin", "rw");
+			Stagiaire stagiaire;
+
+			String nom = "";
+			String prenom = "";
+			String lieu = "";
+			String promotion = "";
+			String annee = "";
+
+			// tant qu'il y a quelque chose √† lire, lit la ligne
+			while (br.ready()) {
+				nom = br.readLine();
+				prenom = br.readLine();
+				lieu = br.readLine();
+				promotion = br.readLine();
+				annee = br.readLine();
+				br.readLine();
+				stagiaire = new Stagiaire(nom, prenom, lieu, promotion, annee);
+				Noeud noeud = new Noeud(stagiaire);
+				raf.seek(0);
+				Noeud.ajouterStagiaire(raf, noeud);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static ObservableList<Stagiaire> lireListeDepuisFichier(RandomAccessFile raf){
+		try {
+			ObservableList<Stagiaire> stagiaires = FXCollections.observableArrayList();
+			Noeud noeud = lireNoeud(raf);
+			if (noeud.filsGauche > 0) {
+				raf.seek(noeud.filsGauche * TAILLE_NOEUD);
+				stagiaires.addAll(lireListeDepuisFichier(raf));
+			}
+			stagiaires.add(noeud.getStagiaire());
+			if (noeud.filsDroit > 0) {
+				raf.seek(noeud.filsDroit * TAILLE_NOEUD);
+				stagiaires.addAll(lireListeDepuisFichier(raf));
 			}
 			return stagiaires;
 		} catch (IOException e) {
