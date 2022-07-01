@@ -3,6 +3,9 @@ package fr.isika.cda18.projet1.groupe3.entites;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Noeud {
 
 	private static final long TAILLE_NOEUD = 124;
@@ -209,5 +212,36 @@ public class Noeud {
 		}
 		return -1;
 
+	}
+
+	public static ObservableList<Stagiaire> rechercheMulticritere(RandomAccessFile raf, Stagiaire criteres) {
+		try {
+			ObservableList<Stagiaire> stagiaires = FXCollections.observableArrayList();
+			Noeud noeud = ArbreBinaire.lireNoeud(raf);
+			if (noeud.filsGauche > 0) {
+				raf.seek(TAILLE_NOEUD * noeud.filsGauche);
+				stagiaires.addAll(rechercheMulticritere(raf, criteres));
+			}
+
+			if ((criteres.getNom().isBlank() || noeud.getStagiaire().getNom().trim().equals(criteres.getNom().trim()))
+					&& (criteres.getPrenom().isBlank()
+							|| noeud.getStagiaire().getPrenom().trim().equals(criteres.getPrenom().trim()))
+					&& (criteres.getLieu().isBlank()
+							|| noeud.getStagiaire().getLieu().trim().equals(criteres.getLieu().trim()))
+					&& (criteres.getPromotion().isBlank()
+							|| noeud.getStagiaire().getPromotion().trim().equals(criteres.getPromotion().trim()))
+					&& (criteres.getAnnee().isBlank()
+							|| noeud.getStagiaire().getAnnee().trim().equals(criteres.getAnnee().trim()))) {
+				stagiaires.add(noeud.getStagiaire());
+			}
+			if (noeud.filsDroit > 0) {
+				raf.seek(TAILLE_NOEUD * noeud.filsDroit);
+				stagiaires.addAll(rechercheMulticritere(raf, criteres));
+			}
+			return stagiaires;
+		} catch (IOException e) {
+
+		}
+		return null;
 	}
 }
