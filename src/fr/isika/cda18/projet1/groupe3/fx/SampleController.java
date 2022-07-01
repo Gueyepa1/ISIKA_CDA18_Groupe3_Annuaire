@@ -54,8 +54,8 @@ public class SampleController {
 		/// dÃ©but partie alert
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Nouveau stagiaire");
-		alert.setHeaderText("Stagiaire ajouté avec succès");
-		alert.setContentText(nom+" "+prenom+" a bien été ajouté à la liste de stagiaires.");
+		alert.setHeaderText("Stagiaire ajoutÃ© avec succÃ¨s");
+		alert.setContentText(nom+" "+prenom+" a bien Ã©tÃ© ajoutÃ© Ã  la liste de stagiaires.");
 		alert.showAndWait();
 		/// fin partie alert*/
 
