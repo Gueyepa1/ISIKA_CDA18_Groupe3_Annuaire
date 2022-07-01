@@ -111,7 +111,7 @@
             </HBox>
             <HBox prefHeight="70.0" prefWidth="700.0">
                <children>
-                  <Button mnemonicParsing="false" text="Imprimer">
+                  <Button fx:id="imprimer" mnemonicParsing="false" onAction="#imprimerHandler" text="Imprimer">
                      <font>
                         <Font size="20.0" />
                      </font>

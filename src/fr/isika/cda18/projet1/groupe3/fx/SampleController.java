@@ -2,7 +2,6 @@ package fr.isika.cda18.projet1.groupe3.fx;
 
 import java.io.IOException;
 
-import fr.isika.cda18.projet1.groupe3.entites.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,13 +16,13 @@ import javafx.stage.Stage;
 public class SampleController {
 
 	@FXML // @FXML = C'est une annotation, c'est une méta-donnée sur un objet
-	private Button Ajouter;
+	private Button ajouter;
 
 	@FXML // @FXML = C'est une annotation, c'est une méta-donnée sur un objet
-	private Button Annuler;
+	private Button annuler;
 
 	@FXML // @FXML = C'est une annotation, c'est une méta-donnée sur un objet
-	private Button Liste;
+	private Button liste;
 
 	@FXML
 	private TextField txtNom;
@@ -49,7 +48,6 @@ public class SampleController {
 		String annee = txtAnnee.getText(); // récupérer l'email
 		// Construction d'un Objet de type Stagiaire avec le constructeur avec
 		// paramètres
-		Stagiaire stagiaire = new Stagiaire(nom, prenom, lieu, promotion, annee);
 
 		/// début partie alert
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -75,11 +73,9 @@ public class SampleController {
 
 	@FXML
 	private void ListeHandler(Event e) throws IOException {
-		// System.out.println("Vers l'interface Liste des stagiaires");
-
 		// 1) On cherche le grand père du bouton[le bouton a comme pere la scène et la
 		// scène a comme père le Stage]
-		Stage primaryStage = (Stage) Liste.getScene().getWindow();
+		Stage primaryStage = (Stage) liste.getScene().getWindow();
 		// 2) Chargement de layout (design) depuis le fichier ListeStagiaires.fxml
 		AnchorPane layoutListe = (AnchorPane) FXMLLoader.load(getClass().getResource("ListeStagiaires.fxml"));
 
@@ -90,7 +86,6 @@ public class SampleController {
 		// 4) On demande à notre stage(théatre) d'affiche la nouvelle scène :
 		// sceneList
 		primaryStage.setScene(sceneList);
-
 	}
 
 }

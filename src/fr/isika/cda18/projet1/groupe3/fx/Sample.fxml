@@ -122,7 +122,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="Ajouter" mnemonicParsing="false" onAction="#AjouterHandler" text="Ajouter ">
+                  <Button fx:id="ajouter" mnemonicParsing="false" onAction="#AjouterHandler" text="Ajouter ">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -130,7 +130,7 @@
                         <Insets left="180.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="Liste" mnemonicParsing="false" onAction="#ListeHandler" text="Liste">
+                  <Button fx:id="liste" mnemonicParsing="false" onAction="#ListeHandler" text="Liste">
                      <font>
                         <Font size="15.0" />
                      </font>
