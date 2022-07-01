@@ -52,27 +52,27 @@
                                           <Insets top="10.0" />
                                        </padding>
                                        <children>
-                                          <TextField prefWidth="180.0" promptText="Nom">
+                                          <TextField fx:id="nomRecherche" prefWidth="180.0" promptText="Nom">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField layoutX="10.0" layoutY="20.0" prefWidth="180.0" promptText="Prénom">
+                                          <TextField fx:id="prenomRecherche" layoutX="10.0" layoutY="20.0" prefWidth="180.0" promptText="Prénom">
                                              <HBox.margin>
                                                 <Insets left="20.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField layoutX="159.0" layoutY="20.0" prefWidth="60.0" promptText="Lieu">
+                                          <TextField fx:id="lieuRecherche" layoutX="159.0" layoutY="20.0" prefWidth="60.0" promptText="Lieu">
                                              <HBox.margin>
                                                 <Insets left="13.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField layoutX="308.0" layoutY="20.0" prefWidth="140.0" promptText="Promotion">
+                                          <TextField fx:id="promotionRecherche" layoutX="308.0" layoutY="20.0" prefWidth="140.0" promptText="Promotion">
                                              <HBox.margin>
                                                 <Insets left="11.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <TextField layoutX="457.0" layoutY="20.0" prefWidth="70.0" promptText="Année">
+                                          <TextField fx:id="anneeRecherche" layoutX="457.0" layoutY="20.0" prefWidth="70.0" promptText="Année">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
