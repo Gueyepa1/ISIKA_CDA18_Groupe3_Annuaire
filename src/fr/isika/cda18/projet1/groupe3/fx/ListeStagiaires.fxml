@@ -127,7 +127,7 @@
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button disable="true" layoutX="227.0" layoutY="20.0" mnemonicParsing="false" text="Modifier Stagiaire">
+                  <Button fx:id="modifier" disable="true" layoutX="227.0" layoutY="20.0" mnemonicParsing="false" text="Modifier Stagiaire">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -135,7 +135,7 @@
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button disable="true" layoutX="400.0" layoutY="20.0" mnemonicParsing="false" text="Supprimer Stagiaire">
+                  <Button fx:id="supprimer" disable="true" layoutX="400.0" layoutY="20.0" mnemonicParsing="false" onAction="#supprimerHandler" text="Supprimer Stagiaire">
                      <font>
                         <Font size="20.0" />
                      </font>

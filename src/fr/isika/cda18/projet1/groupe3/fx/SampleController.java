@@ -104,5 +104,4 @@ public class SampleController {
 		// sceneList
 		primaryStage.setScene(sceneList);
 	}
-
 }
