@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="272.0" fitWidth="335.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../Downloads/CDA18.JPG" />
+            <Image url="@../../../../../../Donnees/CDA18.JPG" />
          </image>
       </ImageView>
       <AnchorPane layoutX="325.0" prefHeight="273.0" prefWidth="288.0">
@@ -25,13 +25,13 @@
             </Label>
             <ImageView fitHeight="44.0" fitWidth="35.0" layoutX="51.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../Downloads/login-icon.jpeg" />
+                  <Image url="@../../../../../../Donnees/login-icon.jpeg" />
                </image>
             </ImageView>
             <PasswordField fx:id="txtPassword" layoutX="106.0" layoutY="106.0" prefHeight="26.0" prefWidth="132.0" promptText="Password" />
             <ImageView fitHeight="35.0" fitWidth="68.0" layoutX="51.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../Downloads/mdp-logo.png" />
+                  <Image url="@../../../../../../Donnees/mdp-logo.png" />
                </image>
             </ImageView>
             <Button fx:id="valider" layoutX="123.0" layoutY="153.0" mnemonicParsing="false" onAction="#validerHandler" text="Valider" />
