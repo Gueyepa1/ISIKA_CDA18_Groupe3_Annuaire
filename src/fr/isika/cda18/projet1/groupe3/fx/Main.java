@@ -27,8 +27,6 @@ public class Main extends Application {
 			}
 			RandomAccessFile raf = new RandomAccessFile("src/Donnees/ListeStagiaires.bin", "rw");
 			raf.seek(0);
-			System.out.println(Noeud.toString(raf));
-			raf.seek(0);
 			stagiaires = Noeud.lireListeDepuisFichier(raf);
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root,650,300);
