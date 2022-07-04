@@ -1,5 +1,6 @@
 package fr.isika.cda18.projet1.groupe3.fx;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,6 +8,7 @@ import fr.isika.cda18.projet1.groupe3.entites.*;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.print.PageOrientation;
 import javafx.print.Paper;
@@ -16,14 +18,20 @@ import javafx.print.PrinterJob;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class ListeStagiairesController implements Initializable {
+	@FXML
+	private Button ajouterStagiaire;
 
 	@FXML
 	private TextField nomRecherche;
@@ -103,4 +111,36 @@ public class ListeStagiairesController implements Initializable {
 		// Charger le TableView par Observable List qui contient nos objets Produits
 		tableauStagiaires.setItems(Main.stagiaires);
 	}
+
+	@FXML
+	private void rechercherHandler(Event e) {
+		nomRecherche.getText(); // récupérer le nom
+		prenomRecherche.getText(); // récupérer le prénom
+		lieuRecherche.getText(); // récupérer le lieu
+		promotionRecherche.getText(); // récupérer la promotion
+		anneeRecherche.getText(); // récupérer l'année
+
+		reinitialisationFormulaire();
+	}
+
+	public void reinitialisationFormulaire() {
+		/// Ré-initialiser le formulaire
+		// TextField
+		nomRecherche.clear();
+		prenomRecherche.clear();
+		lieuRecherche.clear();
+		promotionRecherche.clear();
+		anneeRecherche.clear();
+	}
+
+	@FXML
+	private void ajouterStagiaireHandler(Event e) throws IOException {
+		Stage primaryStage = (Stage) ajouterStagiaire.getScene().getWindow();
+		BorderPane layoutAjouterStagiaire = (BorderPane) FXMLLoader.load(getClass().getResource("Sample.fxml"));
+		Scene sceneList = new Scene(layoutAjouterStagiaire, 500, 500);
+		sceneList.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(sceneList);
+
+	}
+
 }

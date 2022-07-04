@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda18.projet1.groupe3.fx.ListeStagiairesController">
+<AnchorPane prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda18.projet1.groupe3.fx.ListeStagiairesController">
    <children>
       <VBox prefHeight="800.0" prefWidth="700.0">
          <children>
@@ -116,10 +116,10 @@
                         <Font size="20.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="100.0" top="10.0" />
+                        <Insets left="17.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button layoutX="110.0" layoutY="20.0" mnemonicParsing="false" text="Ajouter Stagiaire">
+                  <Button fx:id="ajouterStagiaire" layoutX="110.0" layoutY="20.0" mnemonicParsing="false" onAction="#ajouterStagiaireHandler" text="Ajouter Stagiaire">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -128,6 +128,14 @@
                      </HBox.margin>
                   </Button>
                   <Button disable="true" layoutX="227.0" layoutY="20.0" mnemonicParsing="false" text="Modifier Stagiaire">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button disable="true" layoutX="400.0" layoutY="20.0" mnemonicParsing="false" text="Supprimer Stagiaire">
                      <font>
                         <Font size="20.0" />
                      </font>

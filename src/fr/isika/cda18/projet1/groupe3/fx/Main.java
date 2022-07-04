@@ -10,13 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 
 
 public class Main extends Application {
 
 	public static ObservableList<Stagiaire> stagiaires = FXCollections.observableArrayList();
+	public static boolean estAdmin = false;
 	
 	@Override
 	public void start(Stage primaryStage) { 
@@ -25,9 +26,15 @@ public class Main extends Application {
 				Noeud.donneesVersRaf();
 			}
 			RandomAccessFile raf = new RandomAccessFile("src/Donnees/ListeStagiaires.bin", "rw");
+			Stagiaire stagiaireTest1 = new Stagiaire("LUC", "LACROIX", "92", "CDA18", "2022");
+			Noeud test1 = new Noeud(stagiaireTest1);
+			Noeud.ajouterStagiaire(raf, test1);
+			raf.seek(0);
+			Noeud.toString(raf);
+			raf.seek(0);
 			stagiaires = Noeud.lireListeDepuisFichier(raf);
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
-			Scene scene = new Scene(root,500,500);
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("Login.fxml"));
+			Scene scene = new Scene(root,650,300);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
