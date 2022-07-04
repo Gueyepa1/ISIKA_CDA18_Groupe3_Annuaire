@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="433.0" prefWidth="488.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda18.projet1.groupe3.fx.SampleController">
+<BorderPane prefHeight="433.0" prefWidth="488.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda18.projet1.groupe3.fx.SampleController">
    <center>
       <VBox prefHeight="403.0" prefWidth="488.0" BorderPane.alignment="CENTER">
          <children>
@@ -42,7 +42,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtNom">
+                  <TextField fx:id="txtNom" prefHeight="25.0" prefWidth="250.0">
                      <HBox.margin>
                         <Insets left="120.0" />
                      </HBox.margin>
@@ -62,7 +62,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtPrenom">
+                  <TextField fx:id="txtPrenom" prefHeight="25.0" prefWidth="250.0">
                      <HBox.margin>
                         <Insets left="100.0" />
                      </HBox.margin>
@@ -79,9 +79,9 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtLieu">
+                  <TextField fx:id="txtLieu" prefHeight="25.0" prefWidth="250.0">
                      <HBox.margin>
-                        <Insets left="120.0" />
+                        <Insets left="123.0" />
                      </HBox.margin>
                   </TextField>
                </children>
@@ -96,9 +96,9 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtPromotion">
+                  <TextField fx:id="txtPromotion" prefHeight="25.0" prefWidth="250.0">
                      <HBox.margin>
-                        <Insets left="84.0" />
+                        <Insets left="80.0" />
                      </HBox.margin>
                   </TextField>
                </children>
@@ -113,7 +113,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtAnnee">
+                  <TextField fx:id="txtAnnee" prefHeight="25.0" prefWidth="250.0">
                      <HBox.margin>
                         <Insets left="108.0" />
                      </HBox.margin>
@@ -130,12 +130,12 @@
                         <Insets left="180.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="liste" mnemonicParsing="false" onAction="#listeHandler" text="Liste">
+                  <Button fx:id="liste" mnemonicParsing="false" onAction="#listeHandler" text="Retour Liste">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="18.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="50.0" top="5.0" />
+                        <Insets left="50.0" />
                      </HBox.margin>
                   </Button>
                </children>

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda18.projet1.groupe3.fx.ListeStagiairesController">
+<AnchorPane prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.isika.cda18.projet1.groupe3.fx.ListeStagiairesController">
    <children>
       <VBox prefHeight="800.0" prefWidth="700.0">
          <children>
@@ -27,11 +27,11 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="700.0">
+            <HBox prefHeight="130.0" prefWidth="700.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="800.0">
+                  <VBox prefHeight="70.0" prefWidth="800.0">
                      <children>
-                        <HBox prefHeight="50.0" prefWidth="200.0">
+                        <HBox prefHeight="40.0" prefWidth="200.0">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="100.0" text="Recherche">
                                  <font>
@@ -45,9 +45,9 @@
                         </HBox>
                         <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="200.0" prefWidth="700.0">
+                              <VBox prefHeight="141.0" prefWidth="700.0">
                                  <children>
-                                    <HBox prefHeight="100.0" prefWidth="700.0">
+                                    <HBox prefHeight="90.0" prefWidth="700.0">
                                        <padding>
                                           <Insets top="10.0" />
                                        </padding>
@@ -83,8 +83,11 @@
                                        <children>
                                           <Button fx:id="chercher" mnemonicParsing="false" onAction="#rechercherHandler" text="Chercher">
                                              <HBox.margin>
-                                                <Insets left="322.0" />
+                                                <Insets left="297.0" />
                                              </HBox.margin>
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
                                           </Button>
                                        </children>
                                     </HBox>
