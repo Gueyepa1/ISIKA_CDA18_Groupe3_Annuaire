@@ -34,7 +34,7 @@
                   <Image url="@../../../../../../Donnees/mdp-logo.png" />
                </image>
             </ImageView>
-            <Button fx:id="valider" layoutX="94.0" layoutY="199.0" mnemonicParsing="false" onAction="#validerHandler" text="Valider" />
+            <Button fx:id="valider" layoutX="66.0" layoutY="199.0" mnemonicParsing="false" onAction="#validerHandler" text="Valider" />
             <Button fx:id="liste" layoutX="168.0" layoutY="199.0" mnemonicParsing="false" onAction="#listeHandler" text="Accès Liste" />
             <TextField fx:id="txtLogin" layoutX="92.0" layoutY="98.0" promptText="Login" />
          </children>
