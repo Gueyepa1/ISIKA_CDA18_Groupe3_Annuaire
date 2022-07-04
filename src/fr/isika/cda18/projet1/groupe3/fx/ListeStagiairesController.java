@@ -186,4 +186,24 @@ public class ListeStagiairesController implements Initializable {
 			alert.showAndWait();
 		}
 	}
+
+	@FXML
+	private void modifierHandler(Event e) throws IOException {
+		Stagiaire stagiaire = tableauStagiaires.getSelectionModel().getSelectedItem();
+		if (stagiaire != null) {
+			Stage primaryStage = (Stage) modifier.getScene().getWindow();
+			BorderPane layoutmodifierStagiaire = (BorderPane) FXMLLoader.load(getClass().getResource("ModifierStagiaire.fxml"));
+			Scene sceneList = new Scene(layoutmodifierStagiaire, 500, 500);
+			sceneList.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(sceneList);
+			
+			ModifierStagiaireController.stagiaireAModifier = new Stagiaire(stagiaire.getNom(), stagiaire.getPrenom(), stagiaire.getLieu(), stagiaire.getPromotion(), stagiaire.getAnnee());
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Erreur");
+			alert.setHeaderText("Erreur modification");
+			alert.setContentText("Veuillez sélectionner un stagiaire à modifier.");
+			alert.showAndWait();
+		}
+	}
 }
