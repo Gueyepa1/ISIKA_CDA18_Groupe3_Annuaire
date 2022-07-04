@@ -38,6 +38,9 @@ public class ListeStagiairesController implements Initializable {
 	private Button modifier;
 	
 	@FXML
+	private Button chercher;
+	
+	@FXML
 	private Button ajouterStagiaire;
 
 	@FXML
@@ -127,11 +130,19 @@ public class ListeStagiairesController implements Initializable {
 
 	@FXML
 	private void rechercherHandler(Event e) {
-		nomRecherche.getText(); // récupérer le nom
-		prenomRecherche.getText(); // récupérer le prénom
-		lieuRecherche.getText(); // récupérer le lieu
-		promotionRecherche.getText(); // récupérer la promotion
-		anneeRecherche.getText(); // récupérer l'année
+		String nom = nomRecherche.getText(); // récupérer le nom
+		String prenom = prenomRecherche.getText(); // récupérer le prénom
+		String lieu = lieuRecherche.getText(); // récupérer le lieu
+		String promotion = promotionRecherche.getText(); // récupérer la promotion
+		String annee = anneeRecherche.getText(); // récupérer l'année
+
+		Stagiaire stagiaire = new Stagiaire(nom, prenom, lieu, promotion, annee);
+		try {
+			RandomAccessFile raf = new RandomAccessFile("src/Donnees/ListeStagiaires.bin", "rw");
+			ObservableList<Stagiaire> recherche = Noeud.rechercheMulticritere(raf, stagiaire);
+			tableauStagiaires.setItems(recherche);
+		} catch (Exception e1) {
+		} 
 
 		reinitialisationFormulaire();
 	}

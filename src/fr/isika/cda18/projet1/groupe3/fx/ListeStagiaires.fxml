@@ -81,7 +81,7 @@
                                     </HBox>
                                     <HBox layoutX="10.0" layoutY="10.0" prefHeight="90.0" prefWidth="700.0">
                                        <children>
-                                          <Button mnemonicParsing="false" text="Chercher">
+                                          <Button fx:id="chercher" mnemonicParsing="false" onAction="#rechercherHandler" text="Chercher">
                                              <HBox.margin>
                                                 <Insets left="322.0" />
                                              </HBox.margin>
