@@ -176,7 +176,9 @@ public class ListeStagiairesController implements Initializable {
 				Noeud.supprimerNoeud(raf, stagiaire);
 			} catch (Exception e1) {
 			}
+			System.out.println(tableauStagiaires.getSelectionModel().getSelectedIndex());
 			Main.stagiaires.remove(tableauStagiaires.getSelectionModel().getSelectedIndex());
+			
 		} else {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Erreur");

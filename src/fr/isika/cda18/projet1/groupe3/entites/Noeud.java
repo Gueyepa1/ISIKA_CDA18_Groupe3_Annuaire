@@ -68,7 +68,7 @@ public class Noeud {
 			if(noeud.getStagiaire().getNom().equals(noeudAAjouter.getStagiaire().getNom()) &&
 					noeud.getStagiaire().getPromotion().equals(noeudAAjouter.getStagiaire().getPromotion()) &&
 					noeud.getStagiaire().getPrenom().equals(noeudAAjouter.getStagiaire().getPrenom())) {
-					//Doublon détecté, on s'arrête
+					//Doublon dï¿½tectï¿½, on s'arrï¿½te
 					return;
 				}
 			if (noeud.getStagiaire().getNom().compareTo(noeudAAjouter.getStagiaire().getNom()) > 0) {
@@ -204,18 +204,18 @@ public class Noeud {
 					noeud.filsGauche = supprimerNoeud(raf, stagiaireASupprimer);
 					raf.seek(position);
 					ecrireNoeud(raf, noeud);
-				} else {
-					return (int) (position / TAILLE_NOEUD);
 				}
+				return (int) (position / TAILLE_NOEUD);
+				
 			} else {
 				if (noeud.filsDroit > 0) {
 					raf.seek(TAILLE_NOEUD * noeud.filsDroit);
 					noeud.filsDroit = supprimerNoeud(raf, stagiaireASupprimer);
 					raf.seek(position);
 					ecrireNoeud(raf, noeud);
-				} else {
-					return (int) (position / TAILLE_NOEUD);
 				}
+				return (int) (position / TAILLE_NOEUD);
+				
 			}
 		} catch (Exception e) {
 		}
