@@ -29,7 +29,7 @@ public class Main extends Application {
 			raf.seek(0);
 			stagiaires = Noeud.lireListeDepuisFichier(raf);
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("Login.fxml"));
-			Scene scene = new Scene(root,650,300);
+			Scene scene = new Scene(root,650,272);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
