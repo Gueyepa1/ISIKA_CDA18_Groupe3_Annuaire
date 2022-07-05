@@ -218,7 +218,6 @@ public class ListeStagiairesController implements Initializable {
 			sceneList.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(sceneList);
 			
-			
 		} else {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Erreur");
