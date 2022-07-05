@@ -52,8 +52,7 @@ public class ModifierStagiaireController implements Initializable{
 		String promotion = txtPromotion.getText(); // récupérer la promotion
 		String annee = txtAnnee.getText(); // récupérer l'année
 		// Construction d'un Objet de type Stagiaire avec le constructeur avec
-		Stagiaire stagiaireAModifier = new Stagiaire(nom, prenom, lieu, promotion, annee);
-		Main.stagiaires.add(stagiaireAModifier);
+
 		reinitialisationFormulaire();
 	}
 	
