@@ -196,7 +196,14 @@ public class ListeStagiairesController implements Initializable {
 				}
 			} 
 			else {
-				Main.stagiaires.remove(tableauStagiaires.getSelectionModel().getSelectedIndex());
+				int l = Main.stagiaires.size(), positionStagiaire = 0;
+				for (int i = 0; i < l; i++) {
+					if (stagiaire.getNom().equals(Main.stagiaires.get(i).getNom()) 
+							&& stagiaire.getPrenom().equals(Main.stagiaires.get(i).getPrenom())
+							&& stagiaire.getPromotion().equals(Main.stagiaires.get(i).getPromotion())) {
+						positionStagiaire = i;
+					}}
+				Main.stagiaires.remove(positionStagiaire);
 			}
 		} else {
 			Alert alert = new Alert(AlertType.INFORMATION);
