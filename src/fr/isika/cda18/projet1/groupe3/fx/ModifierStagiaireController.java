@@ -73,7 +73,7 @@ public class ModifierStagiaireController implements Initializable {
 				if (i<Main.stagiaires.size() && stagiaire.getNom().compareTo(Main.stagiaires.get(i).getNom()) < 0) {
 					Main.stagiaires.add(i, stagiaire);
 					break;
-				} else {
+				} else if(i >= Main.stagiaires.size()){
 					Main.stagiaires.add(stagiaire);
 					break;
 				}
