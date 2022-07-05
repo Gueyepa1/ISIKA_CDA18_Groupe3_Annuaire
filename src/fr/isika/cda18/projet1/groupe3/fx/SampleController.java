@@ -61,6 +61,9 @@ public class SampleController {
 			if (stagiaire.getNom().compareTo(Main.stagiaires.get(i).getNom()) < 0) {
 				Main.stagiaires.add(i, stagiaire);
 				break;
+			} else if(i >= Main.stagiaires.size()){
+				Main.stagiaires.add(stagiaire);
+				break;
 			}
 		}
 
