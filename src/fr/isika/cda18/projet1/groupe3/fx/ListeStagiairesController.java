@@ -180,8 +180,23 @@ public class ListeStagiairesController implements Initializable {
 				Noeud.supprimerNoeud(raf, stagiaire);
 			} catch (Exception e1) {
 			}
-			Main.stagiaires.remove(tableauStagiaires.getSelectionModel().getSelectedIndex());
+			ObservableList<Stagiaire> usedList = tableauStagiaires.getItems();
 			
+			if(usedList.size() != Main.stagiaires.size()) {
+				usedList.remove(tableauStagiaires.getSelectionModel().getSelectedIndex());
+				int l = Main.stagiaires.size();
+				for (int i = 0; i < l; i++) {
+					if (stagiaire.getNom().equals(Main.stagiaires.get(i).getNom()) 
+							&& stagiaire.getPrenom().equals(Main.stagiaires.get(i).getPrenom())
+							&& stagiaire.getPromotion().equals(Main.stagiaires.get(i).getPromotion())) {
+						Main.stagiaires.remove(i);
+						break;
+					}
+				}
+			} 
+			else {
+				Main.stagiaires.remove(tableauStagiaires.getSelectionModel().getSelectedIndex());
+			}
 		} else {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Erreur");
