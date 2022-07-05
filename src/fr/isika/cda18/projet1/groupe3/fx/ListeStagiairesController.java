@@ -136,15 +136,19 @@ public class ListeStagiairesController implements Initializable {
 		String promotion = promotionRecherche.getText(); // récupérer la promotion
 		String annee = anneeRecherche.getText(); // récupérer l'année
 
-		Stagiaire stagiaire = new Stagiaire(nom, prenom, lieu, promotion, annee);
-		try {
-			RandomAccessFile raf = new RandomAccessFile("src/Donnees/ListeStagiaires.bin", "rw");
-			ObservableList<Stagiaire> recherche = Noeud.rechercheMulticritere(raf, stagiaire);
-			tableauStagiaires.setItems(recherche);
-		} catch (Exception e1) {
-		} 
-
-		reinitialisationFormulaire();
+		if(nom.isBlank() && prenom.isBlank() && lieu.isBlank() && promotion.isBlank() && annee.isBlank()) {
+			tableauStagiaires.setItems(Main.stagiaires);
+		} else {
+			Stagiaire stagiaire = new Stagiaire(nom, prenom, lieu, promotion, annee);
+			try {
+				RandomAccessFile raf = new RandomAccessFile("src/Donnees/ListeStagiaires.bin", "rw");
+				ObservableList<Stagiaire> recherche = Noeud.rechercheMulticritere(raf, stagiaire);
+				tableauStagiaires.setItems(recherche);
+			} catch (Exception e1) {
+			} 
+	
+			reinitialisationFormulaire();
+			}
 	}
 
 	public void reinitialisationFormulaire() {
